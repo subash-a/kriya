@@ -1,0 +1,5 @@
+feedback,id,location,rank,suggestion,timestamp
+ok,8,20.345:30.567,0,Do some gardening,Mon Feb 09 2015 19:26:23 GMT+0530 (India Standard Time)then,8,20.345:30.567,0,Do some gardening,Mon Feb 09 2015 19:26:25 GMT+0530 (India Standard Time)no,10,20.345:30.567,0,Visit the museum,Mon Feb 09 2015 19:26:27 GMT+0530 (India Standard Time)one,8,20.345:30.567,0,Do some gardening,Mon Feb 09 2015 19:30:56 GMT+0530 (India Standard Time)
+tow,10,20.345:30.567,0,Visit the museum,Mon Feb 09 2015 19:30:58 GMT+0530 (India Standard Time)
+three,10,20.345:30.567,0,Visit the museum,Mon Feb 09 2015 19:31:00 GMT+0530 (India Standard Time)
+four,5,20.345:30.567,0,Read a nice book,Mon Feb 09 2015 19:31:01 GMT+0530 (India Standard Time)

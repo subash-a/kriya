@@ -1,0 +1,74 @@
+{
+    "suggestions": [
+	{
+	    "suggestion":"Ride a Bike",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id":1
+	},
+	{
+	    "suggestion":"Hit the Gym",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 2
+	},
+	{
+	    "suggestion":"Take a walk in the park",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 3
+	},
+	{
+	    "suggestion":"Cook something nice",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 4
+	},
+	{
+	    "suggestion":"Read a nice book",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 5
+	},
+	{
+	    "suggestion":"Watch telivision",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 6
+	},
+	{
+	    "suggestion":"Listen to some music",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 7
+	},
+	{
+	    "suggestion":"Do some gardening",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 8
+	},
+	{
+	    "suggestion":"Call up a friend",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 9
+	},
+	{
+	    "suggestion":"Visit the museum",
+	    "rank": 0,
+	    "feedback": null,
+	    "timestamp": null,
+	    "id": 10
+	}
+    ]
+}
