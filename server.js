@@ -72,4 +72,5 @@ var serverStartup = function() {
     suggestionSet_1.load("mclearn.json");
     console.log("Server started and listening on port 4000");
 };
+
 server.listen(4000, serverStartup);
