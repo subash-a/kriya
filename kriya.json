@@ -1,7 +1,7 @@
 {
-    "suggestions": [
+    "activities": [
 	{
-	    "suggestion":"Ride a Bike",
+	    "activity":"Ride a Bike",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 30
@@ -9,14 +9,14 @@
 	    "id": 1
 	},
 	{
-	    "suggestion":"Hit the Gym",
+	    "activity":"Hit the Gym",
 	    "_metadata":{
 		"rank": 30
 	    },
 	    "id": 2
 	},
 	{
-	    "suggestion":"Take a walk in the park",
+	    "activity":"Take a walk in the park",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 14
@@ -24,7 +24,7 @@
 	    "id": 3
 	},
 	{
-	    "suggestion":"Cook something nice",
+	    "activity":"Cook something nice",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 14
@@ -32,7 +32,7 @@
 	    "id": 4
 	},
 	{
-	    "suggestion":"Read a nice book",
+	    "activity":"Read a nice book",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 63
@@ -40,7 +40,7 @@
 	    "id": 5
 	},
 	{
-	    "suggestion":"Watch telivision",
+	    "activity":"Watch telivision",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 63
@@ -48,7 +48,7 @@
 	    "id": 6
 	},
 	{
-	    "suggestion":"Listen to some music",
+	    "activity":"Listen to some music",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 63
@@ -56,7 +56,7 @@
 	    "id": 7
 	},
 	{
-	    "suggestion":"Do some gardening",
+	    "activity":"Do some gardening",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 14
@@ -64,7 +64,7 @@
 	    "id": 8
 	},
 	{
-	    "suggestion":"Call up a friend",
+	    "activity":"Call up a friend",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 63
@@ -72,7 +72,7 @@
 	    "id": 9
 	},
 	{
-	    "suggestion":"Visit the museum",
+	    "activity":"Visit the museum",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 14
@@ -80,7 +80,7 @@
 	    "id": 10
 	},
 	{
-	    "suggestion":"Watch a movie",
+	    "activity":"Watch a movie",
 	    "_metadata":{
 		"rank": 0,
 		"timeOfDay": 15

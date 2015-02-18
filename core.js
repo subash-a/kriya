@@ -1,84 +1,72 @@
-var fs = require("fs");
-var readline = require("readline");
+var server = require("./server");
+var activities = require("./activities");
 
-var cmdline = readline.createInterface({
-    "input": process.stdin,
-    "output": process.stdout
-});
+// Initialize the Activity Object
+var activitiesSet_1 = new activities.Activities();
 
-var convertObjectToCSVRow = function(object) {
-    var keyList = Object.keys(object).sort();
-	return keyList.map(function(k){
-	    return object[k];
-	}).join(",") + "\n";
+var getActivity = function(request, response) {
+    console.log("Request received");
+    var userLat = request.params.latitude;
+    var userLong = request.params.longitude;
+    var utcTime = request.params.utctime;
+    var randomInteger = parseInt(Math.random()*10,10);
+    var activity = activitiesSet_1.getActivityByIndex(randomInteger);
+    response.send(activity);
 };
 
-var logFeedback = function(feedback,callback) {
-    var afterWrite = function(err) {
-	if(!err) {
-	    if(callback) {
-		callback(feedback);
-	    }
-	}
-    };
-    fs.appendFile("mclearn.fbk",convertObjectToCSVRow(feedback),afterWrite);
-};
-
-var getSuggestion = function(suggestions,method) {
-    var suggestionIndex, response;
-    switch(method) {
-    case "RANDOM":
-	//Fallthrough
-    default:
-	suggestionIndex = parseInt(Math.random()*10,10);
-	response = suggestions[suggestionIndex].suggestion;
-	break;
+var addActivity = function(request, response) {
+    console.log(request.body);
+    var activity = request.body.data;
+    if(activity) {
+	activitiesSet_1.addActivity(activity);
+	response.send("added activity");
     }
-    return response
+    else {
+	response.send("no activity found in data");
+    }
 };
 
-var onRead = function(err, data) {
-    var fileData = JSON.parse(data);
-    var suggestions = fileData.suggestions;
-    var previousSuggestion = null;
-    console.log("Hi, I am Qua your task suggestion companion");
-    cmdline.setPrompt("You: ");
-    cmdline.prompt(true);
-    var showPrompt = function(response) {
-	console.log("Qua: "+response);
-	cmdline.prompt(true);
-    };
-    var analyzeReply = function(text, callback) {
-	var response = getSuggestion(suggestions,method);
-	if(previousSuggestion !== null) {
-	    previousSuggestion.feedback = text;
-	    previousSuggestion.timestamp = (new Date()).toString();
-	    previousSuggestion.location = "20.345:30.567";
-	    logFeedback(previousSuggestion,function(e){});
-	}
-	previousSuggestion = suggestions[suggestionIndex];
-	if(callback) {
-	    callback(response);	    
-	}
-    };
-    var processReply = function(e) {
-	switch(e) {
-	case "bye": cmdline.close();
-	    break;
-	default: analyzeReply(e,showPrompt);
-	    break;
-	}
-    };
-    cmdline.on("line",processReply);
+var updateActivity = function(request, response) {
+    console.log(request.body);
+    console.log(request.body.id);
+    response.send("updated activity");
 };
 
-var requestProcessor = function(request) {
-    console.log(JSON.stringify(request));
+var getRoot = function(request, response) {
+    var welcomeMessage = {"message":"Welcome to Kriya","error":""};
+    response.send(welcomeMessage);
 };
 
-var startApplication = function(filename) { 
-    fs.readFile("mclearn.json",onRead);
+var getActivityDetails = function(request, response) {
+    var activityId = request.params.id;    
+    var activity = activitiesSet_1.getActivityById(activityId);
+    response.send(activity);
 };
 
+var routerConfig = {
+    "/": {
+    	"get":getRoot
+    },
+    "/activity": {
+	"get":getActivity,
+	"post":addActivity,
+	"put":updateActivity
+    },
+    "/activity/:id": {
+	"get":getActivityDetails
+    }
+};
 
-module.exports.startApplication = startApplication;
+var serverConfig = {
+    "hostname": "localhost",
+    "port": 4000,
+    "backlog": 100
+};
+
+var bootstrapActivities = function() {
+    activitiesSet_1.load("kriya.json");
+    console.log("loaded kriya dataset");
+};
+server.configureServer(serverConfig);
+server.configureRoutes(routerConfig);
+server.start(bootstrapActivities);
