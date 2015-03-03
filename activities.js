@@ -16,10 +16,20 @@ var Activities = function() {
 		if(e.id === parseInt(id,10)) {return e};
 	    })[0];
 	},
-	"load": function(filename) {
+	"load": function(filename, error, success) {
 	    var onRead = function(err, data) {
-		var fileData = JSON.parse(data);
-		activities = fileData.activities;
+		if(err) {
+		    if(error) {
+			error();
+		    }
+		}
+		else {
+		    var fileData = JSON.parse(data);
+		    activities = fileData.activities;
+		    if(success) {
+			success();
+		    }
+		}
 	    };
 	    var datafile = filename || "kriya.json";
 	    fs.readFile(datafile, onRead);	    
