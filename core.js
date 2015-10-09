@@ -1,24 +1,17 @@
-var server = require("./server");
-
-var getRoot = function(request, response) {
-    var welcomeMessage = {"message":"Welcome to Kriya","error":""};
-    response.send(welcomeMessage);
-};
-var routerConfig = {
-    "/": {
-    	"get":getRoot
-    },
-};
+var server = require("./src/server");
+var router = require("./src/router-config");
+var dbInterface = require("./src/db-interface");
 
 var serverConfig = {
-    "hostname": "localhost",
-    "port": 4000,
-    "backlog": 100
+	"hostname": "localhost",
+	"port": 4000,
+	"backlog": 100
 };
 
-var bootstrapActivities = function() {
+var bootstrapActivities = function () {
+	dbInterface.connectToDatabase();
 };
 
 server.configureServer(serverConfig);
-server.configureRoutes(routerConfig);
+server.configureRoutes(router.config);
 server.start(bootstrapActivities);
