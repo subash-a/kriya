@@ -1,0 +1,16 @@
+* Kriya
+** This is a document planning all the features that will go into the application
+*** Basic Requirements
+	- Should be able to let user login
+	- Should be able to let the user link his facebook account
+	- Should be able to let the user link his twitter account
+	- Should be able to link his google calendar/ outlook calendar
+	- Should show a list of his friends
+	- Should be able to set home location on map
+	- Should be able to set Food preferences
+	- Should be able to set Activity preferences
+*** Advanced Requirements
+	- Should be able to scrape web for all kinds of events in and around users location
+	- Should be able to infer Food and Activity choices based on facebook activity
+	- Should be able to interface with the booking website to book tickets, tables at restaurant, or cabs
+	- Should be able to suggest plans and activities based on friends and their calendars
