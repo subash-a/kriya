@@ -2,16 +2,22 @@ var server = require("./src/server");
 var router = require("./src/router-config");
 var dbInterface = require("./src/db-interface");
 
-var serverConfig = {
+var localServerConfig = {
 	"hostname": "localhost",
-	"port": 4000,
+	"port": 80,
 	"backlog": 100
 };
+
+var herokuServerConfig = {
+	"hostname": "https://agile-reaches-6281.herokuapp.com",
+	"port": 80,
+	"backlog": 100
+}
 
 var bootstrapActivities = function () {
 	dbInterface.connectToDatabase();
 };
 
-server.configureServer(serverConfig);
+server.configureServer(herokuServerConfig);
 server.configureRoutes(router.config);
 server.start(bootstrapActivities);

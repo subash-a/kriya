@@ -37,7 +37,7 @@ var start = function (callback) {
 		if (callback) {
 			callback();
 		}
-		console.log("Server started and listening on port 4000");
+		console.log("Server started and listening...");
 	};
 	server.listen(port, hostname, backlog, bootstrapServer);
 }
