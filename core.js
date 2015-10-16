@@ -9,7 +9,7 @@ var localServerConfig = {
 };
 
 var herokuServerConfig = {
-	"hostname": "https://agile-reaches-6281.herokuapp.com",
+	"hostname": "agile-reaches-6281.herokuapp.com",
 	"port": 80,
 	"backlog": 100
 }
