@@ -3,8 +3,7 @@ var User = require("./user-model");
 
 function connectToDatabase() {
 	var localConnectionString = "mongodb://localhost:27017/mongoose-hash-test";
-	var herokuConnectionString = "mongodb://agile-reaches-6281.herokuapp.com:27017/mongoose-hash-test";
-	mongoose.connect(herokuConnectionString, function (err) {
+	mongoose.connect(localConnectionString, function (err) {
 		if (err) {
 			handleDBError(err);
 		} else {
