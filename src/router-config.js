@@ -1,3 +1,5 @@
+var dbInterface = require("./db-interface");
+
 function getRoot(request, response) {
 	var welcomeMessage = {
 		"message": "Welcome to Kriya",
