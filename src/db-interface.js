@@ -2,8 +2,7 @@ var mongoose = require("mongoose");
 var User = require("./user-model");
 
 function connectToDatabase() {
-	var localConnectionString = "mongodb://localhost:27017/mongoose-hash-test";
-	mongoose.connect(localConnectionString, function (err) {
+	mongoose.connect(process.env.DB_CONNECTION_STRING, function (err) {
 		if (err) {
 			handleDBError(err);
 		} else {
