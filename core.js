@@ -3,7 +3,7 @@ var router = require("./src/router-config");
 var dbInterface = require("./src/db-interface");
 
 var localServerConfig = {
-	"hostname": "localhost",
+	"hostname": process.env.HOSTADDR,
 	"port": process.env.PORT,
 	"backlog": 100
 };

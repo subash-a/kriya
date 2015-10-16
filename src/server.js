@@ -3,8 +3,8 @@ var bodyParser = require("body-parser");
 var multiParser = require("multer");
 var server = express();
 var hostname, port, backlog;
-var defaultHostname = "localhost";
-var defaultPort = 8000;
+var defaultHostname = process.env.HOSTADDR;
+var defaultPort = process.env.PORT;
 var defaultBacklog = 100;
 
 // Handler functions for the Resources (URL)
