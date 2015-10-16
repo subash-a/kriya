@@ -8,14 +8,8 @@ var localServerConfig = {
 	"backlog": 100
 };
 
-var herokuServerConfig = {
-	"hostname": "agile-reaches-6281.herokuapp.com",
-	"port": 80,
-	"backlog": 100
-}
-
 var bootstrapActivities = function () {
-	dbInterface.connectToDatabase();
+	// dbInterface.connectToDatabase();
 };
 
 server.configureServer(herokuServerConfig);
