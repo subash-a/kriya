@@ -4,7 +4,7 @@ var dbInterface = require("./src/db-interface");
 
 var localServerConfig = {
 	"hostname": "localhost",
-	"port": 8000,
+	"port": process.env.PORT,
 	"backlog": 100
 };
 
