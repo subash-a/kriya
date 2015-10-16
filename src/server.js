@@ -4,7 +4,7 @@ var multiParser = require("multer");
 var server = express();
 var hostname, port, backlog;
 var defaultHostname = "localhost";
-var defaultPort = 4000;
+var defaultPort = 8000;
 var defaultBacklog = 100;
 
 // Handler functions for the Resources (URL)
