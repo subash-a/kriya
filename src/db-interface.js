@@ -50,7 +50,7 @@ function getUser(userObject) {
 }
 
 function doesUserExist(userObject) {
-	getUser(userObject)
+	return getUser(userObject)
 		.then(function (user) {
 			if (user) {
 				Promise.resolve(true);
