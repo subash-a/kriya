@@ -9,7 +9,7 @@ var localServerConfig = {
 };
 
 var bootstrapActivities = function () {
-	// dbInterface.connectToDatabase();
+	dbInterface.connectToDatabase();
 };
 
 server.configureServer(localServerConfig);
