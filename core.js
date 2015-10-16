@@ -12,6 +12,6 @@ var bootstrapActivities = function () {
 	// dbInterface.connectToDatabase();
 };
 
-server.configureServer(herokuServerConfig);
+server.configureServer(localServerConfig);
 server.configureRoutes(router.config);
 server.start(bootstrapActivities);
