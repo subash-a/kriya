@@ -1,4 +1,5 @@
 var dbInterface = require("./db-interface");
+var passport = require("./oauth-logic").passport;
 
 function getRoot(request, response) {
 	var welcomeMessage = {
@@ -84,6 +85,16 @@ function postRegisterUser(request, response) {
 	}
 }
 
+var authenticateFacebook = function(req, res) {
+	passport.authenticate("facebook");
+};
+
+var facebookAuthenticated = function(req, res) {
+	passport.authenticate("facebook", {failureRedirect: "/"}, function(req,res) {
+		console.log("Boom");
+	});
+};
+
 var config = {
 	"/": {
 		"get": getRoot
@@ -95,6 +106,12 @@ var config = {
 	"/register/": {
 		"get": getRegisterUser,
 		"post": postRegisterUser
+	},
+	"/fblogin/": {
+		"get": authenticateFacebook
+	},
+	"/fblogin/authenticated/": {
+		"get": facebookAuthenticated
 	}
 };
 
