@@ -24,3 +24,5 @@ function facebookLogin() {
 	facebookDialog.write("client_id=" + fbConfig.appid + "&redirect_uri=http://localhost/login/");
 	facebookDialog.end();
 }
+
+module.exports.facebookLogin = facebookLogin;

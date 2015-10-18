@@ -1,4 +1,5 @@
 var dbInterface = require("./db-interface");
+var fbAuth = require("./oauth_logic");
 
 function getRoot(request, response) {
 	var welcomeMessage = {
@@ -84,6 +85,14 @@ function postRegisterUser(request, response) {
 	}
 }
 
+function facebookLogin(request, response) {
+	fbAuth.facebookLogin();
+}
+
+function facebookLoginAuthenticated(request, response) {
+
+}
+
 var config = {
 	"/": {
 		"get": getRoot
@@ -95,6 +104,12 @@ var config = {
 	"/register/": {
 		"get": getRegisterUser,
 		"post": postRegisterUser
+	},
+	"/fblogin/": {
+		"get": facebookLogin
+	},
+	"/fblogin/authenticated/": {
+		"get": facebookLoginAuthenticated
 	}
 };
 
