@@ -1,5 +1,5 @@
 var dbInterface = require("./db-interface");
-var fbAuth = require("./oauth_logic");
+var fbAuth = require("./oauth-logic");
 
 function getRoot(request, response) {
 	var welcomeMessage = {
@@ -86,11 +86,12 @@ function postRegisterUser(request, response) {
 }
 
 function facebookLogin(request, response) {
-	fbAuth.facebookLogin();
+	fbAuth.facebookLogin(function(){response.send("done")});
+
 }
 
 function facebookLoginAuthenticated(request, response) {
-
+	response.send("facebook done!");
 }
 
 var config = {
