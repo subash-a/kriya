@@ -90,7 +90,9 @@ var authenticateFacebook = function(req, res) {
 };
 
 var facebookAuthenticated = function(req, res) {
-	passport.authenticate("facebook", {failureRedirect: "/"});
+	passport.authenticate("facebook", {failureRedirect: "/"}, function(req,res) {
+		console.log("Boom");
+	});
 };
 
 var config = {
@@ -109,7 +111,7 @@ var config = {
 		"get": authenticateFacebook
 	},
 	"/fblogin/authenticated/": {
-		"get": facebookLoginAuthenticated
+		"get": facebookAuthenticated
 	}
 };
 

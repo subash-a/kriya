@@ -15,3 +15,9 @@ var bootstrapActivities = function () {
 server.configureServer(localServerConfig);
 server.configureRoutes(router.config);
 server.start(bootstrapActivities);
+
+/**
+AppId: 1658722211069748
+Version: 2.5
+AppSecret: 56ec87e154891b49d599c8041abc88c3
+**/

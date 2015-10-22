@@ -1,6 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var multiParser = require("multer");
+var passport = require("passport");
+
 var server = express();
 var hostname, port, backlog;
 var defaultHostname = process.env.HOSTADDR;
@@ -10,7 +12,7 @@ var defaultBacklog = 100;
 // Handler functions for the Resources (URL)
 server.use(bodyParser.json());
 server.use(multiParser());
-
+server.use(passport.initialize());
 
 var configureRoutes = function (config) {
 	var routes = Object.keys(config);
