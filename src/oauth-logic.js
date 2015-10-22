@@ -1,21 +1,17 @@
 var https = require("https");
 var http = require("http");
+var passport = require("passport");
+var FacebookStrategy = require("facebook-strategy").Strategy;
 
-function facebookLogin(onResponse) {
-	var fbConfig = {
-		appid: "1658722211069748",
-		appsecret:"56ec87e154891b49d599c8041abc88c3",
-		version: "2.5",
-		redirect_uri:"http://localhost/callback"
-	};
+var fbStrategy = new FacebookStrategy({
+	clientID: "1658722211069748",
+	clientSecret: "56ec87e154891b49d599c8041abc88c3",
+	callbackURL: "http://localhost:4000/callback",
+	enableProof: false
+}, function(accessToken, refreshToken, profile, done) {
+	console.log(accessToken);
+});
 
-	var facebookDialog = https.request({
-		hostname: "graph.facebook.com",
-		path: "/v2.5/oauth/access_token"
-	}, onResponse);
+passport.use(fbStrategy);
 
-	facebookDialog.write("client_id=" + fbConfig.appid + "&redirect_uri=http://localhost/login/");
-	facebookDialog.end();
-}
-// access_token: 1658722211069748|u9gOA28IvhAikq6SR8rJswGBu0Q
-module.exports.facebookLogin = facebookLogin;
+module.exports.passport = passport;
