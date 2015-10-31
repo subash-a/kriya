@@ -51,7 +51,14 @@ app.get("/auth/google/callback", function(req, res) {
 });
 
 app.get("/auth/google/done", function(req, res) {
-	res.send("You are authenticated by google");
+	plus.people.get({userId:"me", auth: oauthClient}, function(err, response) {
+		if(!err) {
+			res.send(response);
+		} else {
+			res.send(err);
+		}
+
+	});
 });
 
 app.listen(4000, "localhost");
