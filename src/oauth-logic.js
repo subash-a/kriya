@@ -1,9 +1,7 @@
 var https = require("https");
 var express = require("express");
 var bodyParser = require("body-parser");
-var passport = require("passport");
 var url = require("url");
-var FacebookStrategy = require("passport-facebook").Strategy;
 var AppId = "1658722211069748";
 var AppVersion = "2.5";
 var AppSecret = "56ec87e154891b49d599c8041abc88c3";
@@ -62,20 +60,6 @@ function getFacebookMe(accessToken, callback) {
 	var requestOptions = {
 		host: "graph.facebook.com",
 		path: "/me?fields=id,name",
-		headers:{"Authorization": "Bearer " + tokenObject.access_token}
-	};
-	var responseHandler = function(res) {
-		var str = "";
-		res.on("data", function(d){ str = str + d.toString() });
-		res.on("end", function(){ callback(str) });
-	};
-	https.request(requestOptions, responseHandler).end();
-}
-
-function getFacebookPublicProfile(accessToken, callback) {
-	var requestOptions = {
-		host: "graph.facebook.com",
-		path: "/public_profile",
 		headers:{"Authorization": "Bearer " + tokenObject.access_token}
 	};
 	var responseHandler = function(res) {
