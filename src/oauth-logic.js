@@ -72,20 +72,6 @@ function getFacebookMe(accessToken, callback) {
 	https.request(requestOptions, responseHandler).end();
 }
 
-function getFacebookPublicProfile(accessToken, callback) {
-	var requestOptions = {
-		host: "graph.facebook.com",
-		path: "/public_profile",
-		headers:{"Authorization": "Bearer " + tokenObject.access_token}
-	};
-	var responseHandler = function(res) {
-		var str = "";
-		res.on("data", function(d){ str = str + d.toString() });
-		res.on("end", function(){ callback(str) });
-	};
-	https.request(requestOptions, responseHandler).end();
-}
-
 function getFacebookFriends(accessToken, callback) {
 	var requestOptions = {
 		host: "graph.facebook.com",
