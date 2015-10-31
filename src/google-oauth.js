@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 
 var googleapis = require("googleapis");
 var oauth2 = googleapis.auth.OAuth2;
+var plus = googleapis.plus("v1");
 
 var googleClientID = "403488058074-r54g9s3qb123gn706im8br42nbnc142b.apps.googleusercontent.com";
 var googleClientSecret = "CJ0o6Dyd3s9sqpmytKY3Hb6m";
@@ -38,7 +39,20 @@ app.get("/auth/google/callback", function(req, res) {
 	oauthClient.getToken(code, function(err, tokens) {
 		if(!err) {
 			oauthClient.setCredentials(tokens);
-			res.send(tokens);
+			res.writeHead(302, {
+				Location: "http://localhost:4000/auth/google/done"
+			});
+			res.send();
+		} else {
+			res.send(err);
+		}
+	});
+});
+
+app.get("/auth/google/done", function(req, res) {
+	plus.people.get({userId: "me", auth: oauthClient}, function(err, data){
+		if(!err) {
+			res.send(data);
 		} else {
 			res.send(err);
 		}
