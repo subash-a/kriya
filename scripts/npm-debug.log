@@ -1,44 +1,71 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/subhash_sharma/.nvm/versions/node/v4.1.2/bin/node',
-1 verbose cli   '/Users/subhash_sharma/.nvm/versions/node/v4.1.2/bin/npm',
-1 verbose cli   'run',
-1 verbose cli   'format' ]
-2 info using npm@3.3.6
-3 info using node@v4.1.2
-4 verbose run-script [ 'preformat', 'format', 'postformat' ]
-5 info lifecycle kriya@1.0.0~preformat: kriya@1.0.0
-6 silly lifecycle kriya@1.0.0~preformat: no script for preformat, continuing
-7 info lifecycle kriya@1.0.0~format: kriya@1.0.0
-8 verbose lifecycle kriya@1.0.0~format: unsafe-perm in lifecycle true
-9 verbose lifecycle kriya@1.0.0~format: PATH: /Users/subhash_sharma/.nvm/versions/node/v4.1.2/lib/node_modules/npm/bin/node-gyp-bin:/Users/subhash_sharma/Code/kriya/node_modules/.bin:/Users/subhash_sharma/.nvm/versions/node/v4.1.2/bin:/Users/subhash_sharma/Modelogiq/frontend/node_modules/.bin:/Users/subhash_sharma/Modelogiq/frontend/tsfmt/bin:/Users/subhash_sharma/Modelogiq/frontend/node_modules/.bin:/Users/subhash_sharma/Modelogiq/frontend/tsfmt/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-10 verbose lifecycle kriya@1.0.0~format: CWD: /Users/subhash_sharma/Code/kriya
-11 silly lifecycle kriya@1.0.0~format: Args: [ '-c', './scripts/format_js' ]
-12 info lifecycle kriya@1.0.0~format: Failed to exec format script
-13 verbose stack Error: kriya@1.0.0 format: `./scripts/format_js`
-13 verbose stack spawn ENOENT
-13 verbose stack     at ChildProcess.<anonymous> (/Users/subhash_sharma/.nvm/versions/node/v4.1.2/lib/node_modules/npm/lib/utils/spawn.js:17:16)
-13 verbose stack     at emitTwo (events.js:87:13)
-13 verbose stack     at ChildProcess.emit (events.js:172:7)
-13 verbose stack     at maybeClose (internal/child_process.js:818:16)
-13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-14 verbose pkgid kriya@1.0.0
-15 verbose cwd /Users/subhash_sharma/Code/kriya/scripts
-16 error Darwin 14.5.0
-17 error argv "/Users/subhash_sharma/.nvm/versions/node/v4.1.2/bin/node" "/Users/subhash_sharma/.nvm/versions/node/v4.1.2/bin/npm" "run" "format"
-18 error node v4.1.2
-19 error npm  v3.3.6
-20 error file sh
-21 error code ELIFECYCLE
-22 error errno ENOENT
-23 error syscall spawn
-24 error kriya@1.0.0 format: `./scripts/format_js`
-24 error spawn ENOENT
-25 error Failed at the kriya@1.0.0 format script './scripts/format_js'.
-25 error This is most likely a problem with the kriya package,
-25 error not with npm itself.
-25 error Tell the author that this fails on your system:
-25 error     ./scripts/format_js
-25 error You can get their info via:
-25 error     npm owner ls kriya
-25 error There is likely additional logging output above.
-26 verbose exit [ 1, true ]
+1 verbose cli [ '/Users/subhash_sharma/.nvm/versions/node/v4.2.0/bin/node',
+1 verbose cli   '/Users/subhash_sharma/.nvm/versions/node/v4.2.0/bin/npm',
+1 verbose cli   'owner',
+1 verbose cli   'ls',
+1 verbose cli   'kriya' ]
+2 info using npm@3.3.8
+3 info using node@v4.2.0
+4 silly mapToRegistry name kriya
+5 silly mapToRegistry using default registry
+6 silly mapToRegistry registry https://registry.npmjs.org/
+7 silly mapToRegistry uri https://registry.npmjs.org/kriya
+8 verbose request uri https://registry.npmjs.org/kriya
+9 verbose request no auth needed
+10 info attempt registry request try #1 at 2:43:33 PM
+11 verbose request id 88279efb52953b13
+12 http request GET https://registry.npmjs.org/kriya
+13 http 404 https://registry.npmjs.org/kriya
+14 verbose headers { 'content-type': 'application/json',
+14 verbose headers   'cache-control': 'max-age=0',
+14 verbose headers   'content-length': '2',
+14 verbose headers   'accept-ranges': 'bytes',
+14 verbose headers   date: 'Wed, 04 Nov 2015 09:13:32 GMT',
+14 verbose headers   via: '1.1 varnish',
+14 verbose headers   age: '0',
+14 verbose headers   connection: 'keep-alive',
+14 verbose headers   'x-served-by': 'cache-nrt6128-NRT',
+14 verbose headers   'x-cache': 'MISS',
+14 verbose headers   'x-cache-hits': '0',
+14 verbose headers   'x-timer': 'S1446628412.030579,VS0,VE750' }
+15 silly get cb [ 404,
+15 silly get   { 'content-type': 'application/json',
+15 silly get     'cache-control': 'max-age=0',
+15 silly get     'content-length': '2',
+15 silly get     'accept-ranges': 'bytes',
+15 silly get     date: 'Wed, 04 Nov 2015 09:13:32 GMT',
+15 silly get     via: '1.1 varnish',
+15 silly get     age: '0',
+15 silly get     connection: 'keep-alive',
+15 silly get     'x-served-by': 'cache-nrt6128-NRT',
+15 silly get     'x-cache': 'MISS',
+15 silly get     'x-cache-hits': '0',
+15 silly get     'x-timer': 'S1446628412.030579,VS0,VE750' } ]
+16 error owner ls Couldn't get owner data kriya
+17 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/kriya
+17 verbose stack     at makeError (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+17 verbose stack     at CachingRegistryClient.<anonymous> (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+17 verbose stack     at Request._callback (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+17 verbose stack     at Request.self.callback (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/request/request.js:198:22)
+17 verbose stack     at emitTwo (events.js:87:13)
+17 verbose stack     at Request.emit (events.js:172:7)
+17 verbose stack     at Request.<anonymous> (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+17 verbose stack     at emitOne (events.js:82:20)
+17 verbose stack     at Request.emit (events.js:169:7)
+17 verbose stack     at IncomingMessage.<anonymous> (/Users/subhash_sharma/.nvm/versions/node/v4.2.0/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+18 verbose statusCode 404
+19 verbose pkgid kriya
+20 verbose cwd /Users/subhash_sharma/Code/kriya/scripts
+21 error Darwin 14.5.0
+22 error argv "/Users/subhash_sharma/.nvm/versions/node/v4.2.0/bin/node" "/Users/subhash_sharma/.nvm/versions/node/v4.2.0/bin/npm" "owner" "ls" "kriya"
+23 error node v4.2.0
+24 error npm  v3.3.8
+25 error code E404
+26 error 404 Registry returned 404 for GET on https://registry.npmjs.org/kriya
+26 error 404
+26 error 404 'kriya' is not in the npm registry.
+26 error 404 You should bug the author to publish it (or use the name yourself!)
+26 error 404
+26 error 404 Note that you can also install from a
+26 error 404 tarball, folder, http url, or git url.
+27 verbose exit [ 1, true ]

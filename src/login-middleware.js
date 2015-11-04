@@ -89,4 +89,4 @@ function Login() {
 	};
 }
 
-module.exports.LoginMiddleware = Login;
+module.exports = Login;

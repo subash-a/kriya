@@ -2,9 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var multiParser = require("multer");
 var passport = require("passport");
-
+var router = require("./router-config");
 var server = express();
-var Router = server.Router();
+
 var hostname, port, backlog;
 var defaultHostname = process.env.HOSTADDR;
 var defaultPort = process.env.PORT;
@@ -21,6 +21,10 @@ var configureServer = function (config) {
 	backlog = config.backlog || deafultBacklog;
 };
 
+var configureRouter = function() {
+	server.use(router);
+};
+
 var start = function (callback) {
 	var bootstrapServer = function () {
 		if (callback) {
@@ -33,4 +37,4 @@ var start = function (callback) {
 
 module.exports.start = start;
 module.exports.configureServer = configureServer;
-module.exports.Router = Router;
+module.exports.configureRouter = configureRouter;

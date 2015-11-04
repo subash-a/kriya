@@ -52,4 +52,4 @@ function Google(opts) {
 	};
 }
 
-module.exports.GoogleMiddleware = Google;
+module.exports = Google;

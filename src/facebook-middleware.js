@@ -49,7 +49,7 @@ function Facebook(opts) {
 	var callbackURL = options.callbackURL || "http://localhost:4000/auth/facebook/callback";
 	var scopes = options.scopes;
 	var responseType = options.responseType;
-	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, FACEBOOK_REDIRECT_URI);
+	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, callbackURL);
 	return {
 		redirectToAuthURL: function(request, response) {
 			var redirectURL = oauthClient.generateAuthUrl({
@@ -82,4 +82,4 @@ function Facebook(opts) {
 	}
 }
 
-module.exports.FacebookMiddleware = Facebook;
+module.exports = Facebook;
