@@ -1,3 +1,7 @@
+var googleapis = require("googleapis");
+var oauth2 = googleapis.auth.OAuth2;
+var plus = googleapis.plus("v1");
+
 function Google(opts) {
 	var options = opts || {};
 	var callbackURL = options.callbackURL || "http://localhost:4000/auth/google/callback";
@@ -8,9 +12,6 @@ function Google(opts) {
 		"https://www.googleapis.com/auth/plus.me",
 		"https://www.googleapis.com/auth/calendar"
 	];
-	var googleapis = require("googleapis");
-	var oauth2 = googleapis.auth.OAuth2;
-	var plus = googleapis.plus("v1");
 	var oauthClient = new oauth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, callbackURL);
 	var authCode;
 	return {
@@ -50,3 +51,5 @@ function Google(opts) {
 		}
 	};
 }
+
+module.exports.GoogleMiddleware = Google;

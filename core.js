@@ -13,7 +13,7 @@ var bootstrapActivities = function () {
 };
 
 server.configureServer(localServerConfig);
-server.configureRoutes(router.config);
+router.configureRouter();
 server.start(bootstrapActivities);
 
 /**

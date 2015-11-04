@@ -81,3 +81,5 @@ function Facebook(opts) {
 		}
 	}
 }
+
+module.exports.FacebookMiddleware = Facebook;

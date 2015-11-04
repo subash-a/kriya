@@ -4,6 +4,7 @@ var multiParser = require("multer");
 var passport = require("passport");
 
 var server = express();
+var Router = server.Router();
 var hostname, port, backlog;
 var defaultHostname = process.env.HOSTADDR;
 var defaultPort = process.env.PORT;
@@ -13,20 +14,6 @@ var defaultBacklog = 100;
 server.use(bodyParser.json());
 server.use(multiParser());
 server.use(passport.initialize());
-
-var configureRoutes = function (config) {
-	var routes = Object.keys(config);
-	var assignHandlers = function (uri) {
-		var route = server.route(uri);
-		var methods = config[uri];
-		var assignMethods = function (m) {
-			route[m](methods[m]);
-		};
-		Object.keys(methods)
-			.map(assignMethods);
-	};
-	routes.map(assignHandlers);
-};
 
 var configureServer = function (config) {
 	hostname = config.hostname || defaultHostname;
@@ -46,4 +33,4 @@ var start = function (callback) {
 
 module.exports.start = start;
 module.exports.configureServer = configureServer;
-module.exports.configureRoutes = configureRoutes;
+module.exports.Router = Router;
