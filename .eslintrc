@@ -1,6 +1,11 @@
 {
 	"env":{
+		"browser": true,
 		"node": true
 	},
-	"es6": true
+	"globals": {},
+	"es6": true,
+	"root": true,
+	"extends": "eslint:recommended",
+	"rules": {}
 }

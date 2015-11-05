@@ -2,4 +2,4 @@
 set -e
 # shopt -s globstar
 
-js-beautify --replace --indent-with-tabs --jslint-happy --break-chained-methods ./**/*.js
+../node_modules/js-beautify/js/bin/js-beautify.js --replace --indent-with-tabs --jslint-happy --break-chained-methods ../**/*.js

@@ -1,7 +1,10 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var multiParser = require("multer");
+var passport = require("passport");
+var router = require("./router-config");
 var server = express();
+
 var hostname, port, backlog;
 var defaultHostname = process.env.HOSTADDR;
 var defaultPort = process.env.PORT;
@@ -10,26 +13,16 @@ var defaultBacklog = 100;
 // Handler functions for the Resources (URL)
 server.use(bodyParser.json());
 server.use(multiParser());
-
-
-var configureRoutes = function (config) {
-	var routes = Object.keys(config);
-	var assignHandlers = function (uri) {
-		var route = server.route(uri);
-		var methods = config[uri];
-		var assignMethods = function (m) {
-			route[m](methods[m]);
-		};
-		Object.keys(methods)
-			.map(assignMethods);
-	};
-	routes.map(assignHandlers);
-};
+server.use(passport.initialize());
 
 var configureServer = function (config) {
 	hostname = config.hostname || defaultHostname;
 	port = config.port || defaultPort;
 	backlog = config.backlog || deafultBacklog;
+};
+
+var configureRouter = function() {
+	server.use(router);
 };
 
 var start = function (callback) {
@@ -44,4 +37,4 @@ var start = function (callback) {
 
 module.exports.start = start;
 module.exports.configureServer = configureServer;
-module.exports.configureRoutes = configureRoutes;
+module.exports.configureRouter = configureRouter;
