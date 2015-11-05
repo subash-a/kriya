@@ -1,5 +1,4 @@
-var https = require("https");
-var url = require("url");
+var dbInterface = require("./db-interface");
 
 function Login() {
 	return {
@@ -39,7 +38,6 @@ function Login() {
 						if (isValid) {
 							loginResponse.message = "Login sucessful";
 						} else {
-							console.log(isValid);
 							loginResponse.message = "Username/Password incorrect";
 						}
 						response.send(loginResponse);

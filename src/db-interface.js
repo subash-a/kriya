@@ -6,15 +6,15 @@ function connectToDatabase() {
 		if (err) {
 			handleDBError(err);
 		} else {
-			console.log("Connected to MongoDB successfully");
+			process.stdout.write("connected to MongoDB successfully...\n");
 		}
 	});
 }
 
 var handleDBError = function (err) {
 	if (err) {
-		throw err;
 		mongoose.disconnect();
+		throw err;
 	}
 };
 

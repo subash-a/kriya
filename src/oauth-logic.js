@@ -3,7 +3,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var url = require("url");
 var AppId = "1658722211069748";
-var AppVersion = "2.5";
 var AppSecret = "56ec87e154891b49d599c8041abc88c3";
 
 var app = express();
@@ -24,7 +23,6 @@ app.get("/auth/facebook", function (req, res) {
 	res.send();
 });
 
-var calledOnce = false;
 var tokenObject = {};
 
 app.get("/auth/facebook/callback", function (req, res) {
@@ -50,6 +48,9 @@ app.get("/auth/facebook/done", function (req, res) {
 });
 
 app.get("/my/facebook/info", function (req, res) {
+	getFacebookMe(tokenObject, function(details){
+		res.write(details);
+	});
 	getFacebookFriends(tokenObject, function (details) {
 		res.write(details);
 		res.send();
@@ -106,7 +107,7 @@ function getAccessToken(code, callback) {
 		res.on("data", function (d) {
 			str = str + d.toString()
 		});
-		res.on("end", function (d) {
+		res.on("end", function () {
 			callback(str)
 		});
 	};

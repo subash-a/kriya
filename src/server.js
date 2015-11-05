@@ -18,7 +18,7 @@ server.use(passport.initialize());
 var configureServer = function (config) {
 	hostname = config.hostname || defaultHostname;
 	port = config.port || defaultPort;
-	backlog = config.backlog || deafultBacklog;
+	backlog = config.backlog || defaultBacklog;
 };
 
 var configureRouter = function () {
@@ -30,7 +30,7 @@ var start = function (callback) {
 		if (callback) {
 			callback();
 		}
-		console.log("Server started and listening...");
+		process.stdout.write("Started server and listening...\n");
 	};
 	server.listen(port, hostname, backlog, bootstrapServer);
 }

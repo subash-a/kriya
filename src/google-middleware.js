@@ -1,6 +1,7 @@
 var googleapis = require("googleapis");
+var url = require("url");
 var oauth2 = googleapis.auth.OAuth2;
-var plus = googleapis.plus("v1");
+
 
 function Google(opts) {
 	var options = opts || {};
