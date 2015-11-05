@@ -19,11 +19,11 @@ var scopes = [
 var app = express();
 app.use(bodyParser.json());
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
 	res.send("Welcome to google auth");
 });
 
-app.get("/auth/google", function(req, res) {
+app.get("/auth/google", function (req, res) {
 	var redirectURL = oauthClient.generateAuthUrl({
 		access_type: "online",
 		scope: scopes
@@ -34,10 +34,10 @@ app.get("/auth/google", function(req, res) {
 	res.send();
 });
 
-app.get("/auth/google/callback", function(req, res) {
+app.get("/auth/google/callback", function (req, res) {
 	var code = url.parse(req.url).query.split("=")[1];
-	oauthClient.getToken(code, function(err, tokens) {
-		if(!err) {
+	oauthClient.getToken(code, function (err, tokens) {
+		if (!err) {
 			oauthClient.setCredentials(tokens);
 			res.writeHead(302, {
 				Location: "http://localhost:4000/auth/google/done"
@@ -49,9 +49,12 @@ app.get("/auth/google/callback", function(req, res) {
 	});
 });
 
-app.get("/auth/google/done", function(req, res) {
-	plus.people.get({userId: "me", auth: oauthClient}, function(err, data){
-		if(!err) {
+app.get("/auth/google/done", function (req, res) {
+	plus.people.get({
+		userId: "me",
+		auth: oauthClient
+	}, function (err, data) {
+		if (!err) {
 			res.send(data);
 		} else {
 			res.send(err);

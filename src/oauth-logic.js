@@ -12,14 +12,14 @@ app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded());
 
-app.route("/").get(function(req, res){
+app.route("/").get(function (req, res) {
 	res.write("welcome");
 	res.send();
 });
 
-app.get("/auth/facebook", function(req, res) {
+app.get("/auth/facebook", function (req, res) {
 	res.writeHead(302, {
-		Location: "https://www.facebook.com/dialog/oauth?client_id="+AppId+"&redirect_uri=http://localhost:4000/auth/facebook/callback&response_type=code&scope=email,user_friends,public_profile"
+		Location: "https://www.facebook.com/dialog/oauth?client_id=" + AppId + "&redirect_uri=http://localhost:4000/auth/facebook/callback&response_type=code&scope=email,user_friends,public_profile"
 	});
 	res.send();
 });
@@ -27,9 +27,9 @@ app.get("/auth/facebook", function(req, res) {
 var calledOnce = false;
 var tokenObject = {};
 
-app.get("/auth/facebook/callback", function(req, res) {
+app.get("/auth/facebook/callback", function (req, res) {
 	var code = url.parse(req.url).query.split("=")[1];
-	getAccessToken(code, function(str){
+	getAccessToken(code, function (str) {
 		// write the access_token to a db entry and then redirect
 		tokenObject = JSON.parse(str);
 		res.writeHead(302, {
@@ -40,17 +40,17 @@ app.get("/auth/facebook/callback", function(req, res) {
 	});
 });
 
-app.get("/auth/facebook/done", function(req, res) {
+app.get("/auth/facebook/done", function (req, res) {
 	res.writeHead(200, {
-		"Content-Type":"text/html",
+		"Content-Type": "text/html",
 		"Connection": "keep-alive"
 	});
 	res.write("<form action='/my/facebook/info'><button>Me</button></form>")
 	res.send();
 });
 
-app.get("/my/facebook/info", function(req, res) {
-	getFacebookFriends(tokenObject, function(details) {
+app.get("/my/facebook/info", function (req, res) {
+	getFacebookFriends(tokenObject, function (details) {
 		res.write(details);
 		res.send();
 	});
@@ -60,12 +60,18 @@ function getFacebookMe(accessToken, callback) {
 	var requestOptions = {
 		host: "graph.facebook.com",
 		path: "/me?fields=id,name",
-		headers:{"Authorization": "Bearer " + tokenObject.access_token}
+		headers: {
+			"Authorization": "Bearer " + tokenObject.access_token
+		}
 	};
-	var responseHandler = function(res) {
+	var responseHandler = function (res) {
 		var str = "";
-		res.on("data", function(d){ str = str + d.toString() });
-		res.on("end", function(){ callback(str) });
+		res.on("data", function (d) {
+			str = str + d.toString()
+		});
+		res.on("end", function () {
+			callback(str)
+		});
 	};
 	https.request(requestOptions, responseHandler).end();
 }
@@ -74,12 +80,18 @@ function getFacebookFriends(accessToken, callback) {
 	var requestOptions = {
 		host: "graph.facebook.com",
 		path: "/me/friends?fields=id,name",
-		headers:{"Authorization": "Bearer " + tokenObject.access_token}
+		headers: {
+			"Authorization": "Bearer " + tokenObject.access_token
+		}
 	};
-	var responseHandler = function(res) {
+	var responseHandler = function (res) {
 		var str = "";
-		res.on("data", function(d){ str = str + d.toString() });
-		res.on("end", function(){ callback(str) });
+		res.on("data", function (d) {
+			str = str + d.toString()
+		});
+		res.on("end", function () {
+			callback(str)
+		});
 	};
 	https.request(requestOptions, responseHandler).end();
 }
@@ -87,12 +99,16 @@ function getFacebookFriends(accessToken, callback) {
 function getAccessToken(code, callback) {
 	var requestOptions = {
 		host: "graph.facebook.com",
-		path: "/v2.3/oauth/access_token?client_id="+AppId+"&client_secret="+AppSecret+"&code="+code+"&redirect_uri=http://localhost:4000/auth/facebook/callback"
+		path: "/v2.3/oauth/access_token?client_id=" + AppId + "&client_secret=" + AppSecret + "&code=" + code + "&redirect_uri=http://localhost:4000/auth/facebook/callback"
 	};
-	var callbackHandler = function(res) {
+	var callbackHandler = function (res) {
 		var str = "";
-		res.on("data", function(d){str = str + d.toString()});
-		res.on("end", function(d){callback(str)});
+		res.on("data", function (d) {
+			str = str + d.toString()
+		});
+		res.on("end", function (d) {
+			callback(str)
+		});
 	};
 	https.request(requestOptions, callbackHandler).end();
 }

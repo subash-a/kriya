@@ -3,7 +3,7 @@ var url = require("url");
 
 function Login() {
 	return {
-		getRoot: function(request, response) {
+		getRoot: function (request, response) {
 			var welcomeMessage = {
 				"message": "Welcome to Kriya",
 				"error": false
@@ -11,7 +11,7 @@ function Login() {
 			response.send(welcomeMessage);
 		},
 
-		getUserLogin: function(request, response) {
+		getUserLogin: function (request, response) {
 			var loginRequestMessage = {
 				"message": "",
 				"params_required": ["username", "secret", "api_token"],
@@ -20,7 +20,7 @@ function Login() {
 			response.send(loginRequestMessage);
 		},
 
-		postUserLogin: function(request, response) {
+		postUserLogin: function (request, response) {
 			var body = request.body;
 			var loginResponse = {
 				message: "",
@@ -32,9 +32,9 @@ function Login() {
 				response.send(loginResponse)
 			} else {
 				dbInterface.validateCredentials({
-				username: body.username,
-					password: body.secret
-				})
+						username: body.username,
+						password: body.secret
+					})
 					.then(function (isValid) {
 						if (isValid) {
 							loginResponse.message = "Login sucessful";
@@ -47,7 +47,7 @@ function Login() {
 			}
 		},
 
-		getRegisterUser: function(request, response) {
+		getRegisterUser: function (request, response) {
 			var registrationRequestMessage = {
 				"message": "",
 				"params_required": ["username", "secret", "api_token"],
@@ -56,7 +56,7 @@ function Login() {
 			response.send(registrationRequestMessage);
 		},
 
-		postRegisterUser: function(request, response) {
+		postRegisterUser: function (request, response) {
 			var body = request.body;
 			var registrationResponse = {
 				message: "",
@@ -68,9 +68,9 @@ function Login() {
 				response.send(registrationResponse)
 			} else {
 				dbInterface.registerUser({
-					username: body.username,
-					password: body.secret
-				})
+						username: body.username,
+						password: body.secret
+					})
 					.then(function (isRegistered) {
 						if (isRegistered) {
 							registrationResponse.message = "Registration sucessful";

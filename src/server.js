@@ -21,7 +21,7 @@ var configureServer = function (config) {
 	backlog = config.backlog || deafultBacklog;
 };
 
-var configureRouter = function() {
+var configureRouter = function () {
 	server.use(router);
 };
 
