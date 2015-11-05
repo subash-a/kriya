@@ -12,7 +12,7 @@ var globalConfiguration = {
 };
 
 var bootstrapActivities = function () {
-	if(globalConfiguration.useDatabase) {
+	if (globalConfiguration.useDatabase) {
 		dbInterface.connectToDatabase();
 	}
 };

@@ -10,7 +10,7 @@ var google = new GoogleMiddleware();
 var facebook = new FacebookMiddleware();
 
 Router.get("/", login.getRoot);
-Router.get("/auth/login",login.getUserLogin);
+Router.get("/auth/login", login.getUserLogin);
 Router.post("/auth/login", login.postUserLogin);
 Router.get("/auth/register", login.getRegisterUser);
 Router.post("/auth/register", login.postRegisterUser);

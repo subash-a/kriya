@@ -6,34 +6,34 @@ function FacebookOAuthClient(clientID, clientSecret, redirectURI) {
 	this.expires = null;
 	this.refresh_token = null;
 	return {
-		generateAuthUrl: function(opts) {
+		generateAuthUrl: function (opts) {
 			var options = opts || {};
 			var responseType = options.responseType || "code";
-			var scopes = options.scopes || ["email","user_friends","public_profile"];
-			return "https://www.facebook.com/dialog/oauth?client_id="+this.clientID+"&redirect_uri="+this.redirectURI+"&responseponse_type="+responseType+"&scope="+scopes.join(",");
+			var scopes = options.scopes || ["email", "user_friends", "public_profile"];
+			return "https://www.facebook.com/dialog/oauth?client_id=" + this.clientID + "&redirect_uri=" + this.redirectURI + "&responseponse_type=" + responseType + "&scope=" + scopes.join(",");
 		},
-		getAccessToken: function(code, callback) {
+		getAccessToken: function (code, callback) {
 			var requestOptions = {
 				host: "graph.facebook.com",
-				path: "/v2.3/oauth/access_token?client_id="+this.clientID+"&client_secret="+this.clientSecret+"&code="+code+"&redirect_uri="+this.redirectURI
+				path: "/v2.3/oauth/access_token?client_id=" + this.clientID + "&client_secret=" + this.clientSecret + "&code=" + code + "&redirect_uri=" + this.redirectURI
 			};
-			var callbackHandler = function(res) {
+			var callbackHandler = function (res) {
 				var str = "";
-				res.on("data", function(d){
+				res.on("data", function (d) {
 					str = str + d.toString();
 				});
-				res.on("end", function(d){
+				res.on("end", function (d) {
 					try {
 						var json = JSON.parse(str);
 						callback(undefined, str);
-					} catch(err) {
+					} catch (err) {
 						callback(err, str);
 					}
 				});
 			};
 			https.request(requestOptions, callbackHandler).end();
 		},
-		setCredentials: function(tokenObject) {
+		setCredentials: function (tokenObject) {
 			this.access_token = tokenObject.access_token;
 			this.refresh_token = tokenObject.refresh_token;
 			this.expires = tokenObject.expires;
@@ -51,7 +51,7 @@ function Facebook(opts) {
 	var responseType = options.responseType;
 	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, callbackURL);
 	return {
-		redirectToAuthURL: function(request, response) {
+		redirectToAuthURL: function (request, response) {
 			var redirectURL = oauthClient.generateAuthUrl({
 				responseType: responseType,
 				scopes: scopes
@@ -61,10 +61,10 @@ function Facebook(opts) {
 			});
 			response.send();
 		},
-		fetchAccessToken: function(request, response) {
+		fetchAccessToken: function (request, response) {
 			var code = url.parse(req.url).query.split("=")[1];
-			oauthClient.getAccessToken(code, function(err, tokenObject){
-				if(!err) {
+			oauthClient.getAccessToken(code, function (err, tokenObject) {
+				if (!err) {
 					oauthClient.setCredentials(tokenObject);
 					response.writeHead(302, {
 						Location: "http://localhost:4000/auth/facebook/done",
@@ -76,7 +76,7 @@ function Facebook(opts) {
 				}
 			});
 		},
-		finishOAuth: function(request, response) {
+		finishOAuth: function (request, response) {
 			response.send("You are done authorizing Facebook to use Kriya");
 		}
 	}

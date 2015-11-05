@@ -15,7 +15,7 @@ function Google(opts) {
 	var oauthClient = new oauth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, callbackURL);
 	var authCode;
 	return {
-		redirectAuthURL: function(request, response) {
+		redirectAuthURL: function (request, response) {
 			var redirectURL = oauthClient.generateAuthUrl({
 				access_type: accessType,
 				scope: SCOPES
@@ -25,17 +25,17 @@ function Google(opts) {
 			});
 			response.send();
 		},
-		fetchAuthCode: function(request, response, next) {
+		fetchAuthCode: function (request, response, next) {
 			authCode = url.parse(request.url).query.split("=")[1];
-			if(authCode) {
+			if (authCode) {
 				next();
 			} else {
 				response.send("Invalid code");
 			}
 		},
-		fetchAccessToken: function(request, response) {
-			oauthClient.getToken(authCode, function(err, tokens) {
-				if(!err) {
+		fetchAccessToken: function (request, response) {
+			oauthClient.getToken(authCode, function (err, tokens) {
+				if (!err) {
 					oauthClient.setCredentials(tokens);
 					response.writeHead(302, {
 						Location: "http://localhost:4000/auth/google/done"
@@ -46,7 +46,7 @@ function Google(opts) {
 				}
 			});
 		},
-		finishOAuth: function(request, response) {
+		finishOAuth: function (request, response) {
 			response.send("You are done authorizing Google to use Kriya");
 		}
 	};
