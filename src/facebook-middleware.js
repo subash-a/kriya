@@ -1,6 +1,10 @@
-function FacebookOAuthClient(clientID, clientSecret, redirectURI) {
+var https = require("https");
+var url = require("url");
+
+function FacebookOAuthClient(clientID, clientSecret, clientVersion, redirectURI) {
 	this.clientID = clientID;
 	this.clientSecret = clientSecret;
+	this.clientVersion = clientVersion;
 	this.redirectURI = redirectURI;
 	this.access_token = null;
 	this.expires = null;
@@ -15,19 +19,19 @@ function FacebookOAuthClient(clientID, clientSecret, redirectURI) {
 		getAccessToken: function (code, callback) {
 			var requestOptions = {
 				host: "graph.facebook.com",
-				path: "/v2.3/oauth/access_token?client_id=" + this.clientID + "&client_secret=" + this.clientSecret + "&code=" + code + "&redirect_uri=" + this.redirectURI
+				path: "/"+this.clientVersion+"/oauth/access_token?client_id=" + this.clientID + "&client_secret=" + this.clientSecret + "&code=" + code + "&redirect_uri=" + this.redirectURI
 			};
 			var callbackHandler = function (res) {
 				var str = "";
 				res.on("data", function (d) {
 					str = str + d.toString();
 				});
-				res.on("end", function (d) {
+				res.on("end", function () {
 					try {
 						var json = JSON.parse(str);
-						callback(undefined, str);
+						callback(undefined, json);
 					} catch (err) {
-						callback(err, str);
+						callback(err, json);
 					}
 				});
 			};
@@ -49,7 +53,7 @@ function Facebook(opts) {
 	var callbackURL = options.callbackURL || "http://localhost:4000/auth/facebook/callback";
 	var scopes = options.scopes;
 	var responseType = options.responseType;
-	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, callbackURL);
+	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, FACEBOOK_CLIENT_VERSION, callbackURL);
 	return {
 		redirectToAuthURL: function (request, response) {
 			var redirectURL = oauthClient.generateAuthUrl({
@@ -62,7 +66,7 @@ function Facebook(opts) {
 			response.send();
 		},
 		fetchAccessToken: function (request, response) {
-			var code = url.parse(req.url).query.split("=")[1];
+			var code = url.parse(request.url).query.split("=")[1];
 			oauthClient.getAccessToken(code, function (err, tokenObject) {
 				if (!err) {
 					oauthClient.setCredentials(tokenObject);

@@ -5,5 +5,5 @@ set -o pipefail # fail if any of the commands in the chain fail
 if [ $KRIYA == "" ]; then
 	echo "KRIYA env variable needs to be set to project path"
 else
-	$KRIYA/node_modules/eslint/bin/eslint.js -c $KRIYA/.eslintrc $KRIYA/**/*.js
+	$KRIYA/node_modules/eslint/bin/eslint.js -c $KRIYA/.eslintrc $KRIYA/*.js $KRIYA/src/**/*.js
 fi
