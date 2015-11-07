@@ -1,3 +1,5 @@
+var User = require("./user-model");
+var UserStore = require("./user-store");
 var dbInterface = require("./db-interface");
 
 function Login() {
@@ -20,29 +22,28 @@ function Login() {
 		},
 
 		postUserLogin: function (request, response) {
-			var body = request.body;
+			var body = "";
 			var loginResponse = {
 				message: "",
 				error: false
 			};
-			if (!body.username || !body.secret || !body.token) {
-				loginResponse.message = "Missing parameters for login";
-				loginResponse.error = true;
-				response.send(loginResponse)
-			} else {
-				dbInterface.validateCredentials({
-						username: body.username,
-						password: body.secret
-					})
-					.then(function (isValid) {
-						if (isValid) {
-							loginResponse.message = "Login sucessful";
-						} else {
-							loginResponse.message = "Username/Password incorrect";
-						}
-						response.send(loginResponse);
-					});
-			}
+			request.on("data", function (data) {
+				body = body + data;
+			});
+			request.on("end", function () {
+				body = JSON.parse(body.toString());
+				if (!body.username || !body.secret || !body.token) {
+					console.log(body);
+					loginResponse.message = "Missing parameters for login";
+					loginResponse.error = true;
+					response.send(loginResponse)
+				} else {
+					console.log(body);
+					response.send(loginResponse);
+					// validate pasword and send response
+
+				}
+			});
 		},
 
 		getRegisterUser: function (request, response) {
@@ -65,23 +66,8 @@ function Login() {
 				registrationResponse.error = true;
 				response.send(registrationResponse)
 			} else {
-				dbInterface.registerUser({
-						username: body.username,
-						password: body.secret
-					})
-					.then(function (isRegistered) {
-						if (isRegistered) {
-							registrationResponse.message = "Registration sucessful";
-						} else {
-							registrationResponse.message = "Username already registered";
-						}
-						response.send(registrationResponse);
-					})
-					.catch(function (err) {
-						registrationResponse.message = "Unexpected failure";
-						registrationResponse.error = err;
-						response.send(registrationResponse);
-					});
+				//
+				response.send(registrationResponse);
 			}
 		}
 	};

@@ -9,48 +9,50 @@ function FacebookOAuthClient(clientID, clientSecret, clientVersion, redirectURI)
 	this.access_token = null;
 	this.expires = null;
 	this.refresh_token = null;
-	return {
-		generateAuthUrl: function (opts) {
-			var options = opts || {};
-			var responseType = options.responseType || "code";
-			var scopes = options.scopes || ["email", "user_friends", "public_profile"];
-			return "https://www.facebook.com/dialog/oauth?client_id=" + this.clientID + "&redirect_uri=" + this.redirectURI + "&responseponse_type=" + responseType + "&scope=" + scopes.join(",");
-		},
-		getAccessToken: function (code, callback) {
-			var requestOptions = {
-				host: "graph.facebook.com",
-				path: "/"+this.clientVersion+"/oauth/access_token?client_id=" + this.clientID + "&client_secret=" + this.clientSecret + "&code=" + code + "&redirect_uri=" + this.redirectURI
-			};
-			var callbackHandler = function (res) {
-				var str = "";
-				res.on("data", function (d) {
-					str = str + d.toString();
-				});
-				res.on("end", function () {
-					try {
-						var json = JSON.parse(str);
-						callback(undefined, json);
-					} catch (err) {
-						callback(err, json);
-					}
-				});
-			};
-			https.request(requestOptions, callbackHandler).end();
-		},
-		setCredentials: function (tokenObject) {
-			this.access_token = tokenObject.access_token;
-			this.refresh_token = tokenObject.refresh_token;
-			this.expires = tokenObject.expires;
-		}
-	}
 }
+
+FacebookOAuthClient.prototype.generateAuthUrl = function (opts) {
+	var options = opts || {};
+	var responseType = options.responseType || "code";
+	var scopes = options.scopes || ["email", "user_friends", "public_profile"];
+	return "https://www.facebook.com/dialog/oauth?client_id=" + this.clientID + "&redirect_uri=" + this.redirectURI + "&responseponse_type=" + responseType + "&scope=" + scopes.join(",");
+};
+
+FacebookOAuthClient.prototype.getAccessToken = function (code, callback) {
+	var requestOptions = {
+		host: "graph.facebook.com",
+		path: "/" + this.clientVersion + "/oauth/access_token?client_id=" + this.clientID + "&client_secret=" + this.clientSecret + "&code=" + code + "&redirect_uri=" + this.redirectURI
+	};
+	var callbackHandler = function (res) {
+		var str = "";
+		res.on("data", function (d) {
+			str = str + d.toString();
+		});
+		res.on("end", function () {
+			try {
+				var json = JSON.parse(str);
+				callback(undefined, json);
+			} catch (err) {
+				callback(err, json);
+			}
+		});
+	};
+	https.request(requestOptions, callbackHandler).end();
+};
+
+FacebookOAuthClient.prototype.setCredentials = function (tokenObject) {
+	this.access_token = tokenObject.access_token;
+	this.refresh_token = tokenObject.refresh_token;
+	this.expires = tokenObject.expires;
+};
+
 
 function Facebook(opts) {
 	var options = opts || {};
 	var FACEBOOK_CLIENT_ID = "1658722211069748";
 	var FACEBOOK_CLIENT_VERSION = "2.5";
 	var FACEBOOK_CLIENT_SECRET = "56ec87e154891b49d599c8041abc88c3";
-	var callbackURL = options.callbackURL || "http://localhost:4000/auth/facebook/callback";
+	var callbackURL = options.callbackURL || "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/facebook/callback";
 	var scopes = options.scopes;
 	var responseType = options.responseType;
 	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, FACEBOOK_CLIENT_VERSION, callbackURL);
@@ -71,7 +73,7 @@ function Facebook(opts) {
 				if (!err) {
 					oauthClient.setCredentials(tokenObject);
 					response.writeHead(302, {
-						Location: "http://localhost:4000/auth/facebook/done",
+						Location: "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/facebook/done",
 						Connection: "keep-alive"
 					});
 					response.send();
