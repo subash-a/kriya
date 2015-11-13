@@ -16,7 +16,7 @@ function Google(opts) {
 	var oauthClient = new oauth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, callbackURL);
 	var authCode;
 	return {
-		redirectAuthURL: function (request, response) {
+		redirectToAuthURL: function (request, response) {
 			var redirectURL = oauthClient.generateAuthUrl({
 				access_type: accessType,
 				scope: SCOPES

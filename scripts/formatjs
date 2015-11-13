@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-if [ $KRIYA == "" ]; then
+if [ "$KRIYA" == "" ]; then
 	echo "KRIYA env variable needs to be set to project path"
 else
 	$KRIYA/node_modules/js-beautify/js/bin/js-beautify.js --replace --indent-with-tabs --jslint-happy $KRIYA/*.js $KRIYA/src/*.js

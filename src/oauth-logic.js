@@ -48,7 +48,7 @@ app.get("/auth/facebook/done", function (req, res) {
 });
 
 app.get("/my/facebook/info", function (req, res) {
-	getFacebookMe(tokenObject, function(details){
+	getFacebookMe(tokenObject, function (details) {
 		res.write(details);
 	});
 	getFacebookFriends(tokenObject, function (details) {

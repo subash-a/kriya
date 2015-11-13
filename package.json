@@ -11,7 +11,8 @@
   "scripts": {
     "start": "nodemon core.js",
     "lint": "./scripts/lintjs",
-    "format": "./scripts/formatjs"
+    "format": "./scripts/formatjs",
+    "test": "./scripts/runtest"
   },
   "bugs": {
     "author": "Subhash",
@@ -40,8 +41,13 @@
     "type": "github"
   },
   "devDependencies": {
+    "babel": "^6.1.18",
     "eslint": "^1.6.0",
+    "jasmine": "^2.3.2",
     "js-beautify": "^1.5.10",
     "nodemon": "^1.7.1"
-  }
+  },
+	"babel": {
+		"sourceRoot": "."
+	}
 }

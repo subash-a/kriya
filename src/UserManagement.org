@@ -1,0 +1,15 @@
+* Users and UserManagement
+** Definition of a User
+   User is an entity which can be uniquely identified by a username and also has a password for authentication
+   Behaviour of a User Entity
+   - New instance of User can be created (requires username, name and password)
+   - Value of the password can be reset for the User entity
+   - Value of name can be reset for User entity
+   - Value of facebook access token can be set on the user
+   - Value of google access token can be set on the user
+** Definition of a UserStore
+   User Store is a system for storing and operating on a collection of Users
+   Behaviour of a UserStore
+   - Allow new User entries to be created
+   - Allow User entries to be searched
+   - Allow User entires to be removed
