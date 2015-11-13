@@ -23,7 +23,7 @@ Router.get("/auth/facebook/done", facebook.finishOAuth);
 
 /* Google oauth login routes */
 Router.get("/auth/google/", google.redirectToAuthURL);
-Router.get("/auth/google/callback", google.fetchAccessToken);
+Router.get("/auth/google/callback", google.fetchAuthCode, google.fetchAccessToken);
 Router.get("/auth/google/done", google.finishOAuth);
 
 module.exports = Router;
