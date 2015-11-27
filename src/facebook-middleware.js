@@ -52,7 +52,7 @@ function Facebook(opts) {
 	var FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID;
 	var FACEBOOK_CLIENT_VERSION = "2.5";
 	var FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET;
-	var callbackURL = options.callbackURL || "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/facebook/callback";
+	var callbackURL = options.callbackURL || "http://" + process.env.HOSTADDR + ":" + process.env.PORT + "/auth/facebook/callback";
 	var scopes = options.scopes;
 	var responseType = options.responseType;
 	var oauthClient = new FacebookOAuthClient(FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, FACEBOOK_CLIENT_VERSION, callbackURL);
@@ -73,7 +73,7 @@ function Facebook(opts) {
 				if (!err) {
 					oauthClient.setCredentials(tokenObject);
 					response.writeHead(302, {
-						Location: "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/facebook/done",
+						Location: "http://" + process.env.HOSTADDR + ":" + process.env.PORT + "/auth/facebook/done",
 						Connection: "keep-alive"
 					});
 					response.send();

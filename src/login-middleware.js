@@ -1,7 +1,3 @@
-var User = require("./user-model");
-var UserStore = require("./user-store");
-var dbInterface = require("./db-interface");
-
 function Login() {
 	return {
 		getRoot: function (request, response) {
@@ -33,15 +29,12 @@ function Login() {
 			request.on("end", function () {
 				body = JSON.parse(body.toString());
 				if (!body.username || !body.secret || !body.token) {
-					console.log(body);
 					loginResponse.message = "Missing parameters for login";
 					loginResponse.error = true;
 					response.send(loginResponse)
 				} else {
-					console.log(body);
 					response.send(loginResponse);
 					// validate pasword and send response
-
 				}
 			});
 		},
