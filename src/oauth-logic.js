@@ -2,8 +2,6 @@ var https = require("https");
 var express = require("express");
 var bodyParser = require("body-parser");
 var url = require("url");
-var AppId = "1658722211069748";
-var AppSecret = "56ec87e154891b49d599c8041abc88c3";
 
 var app = express();
 app.use(bodyParser.json());
