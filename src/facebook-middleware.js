@@ -49,9 +49,9 @@ FacebookOAuthClient.prototype.setCredentials = function (tokenObject) {
 
 function Facebook(opts) {
 	var options = opts || {};
-	var FACEBOOK_CLIENT_ID = "1658722211069748";
+	var FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID;
 	var FACEBOOK_CLIENT_VERSION = "2.5";
-	var FACEBOOK_CLIENT_SECRET = "56ec87e154891b49d599c8041abc88c3";
+	var FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET;
 	var callbackURL = options.callbackURL || "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/facebook/callback";
 	var scopes = options.scopes;
 	var responseType = options.responseType;

@@ -7,8 +7,8 @@ function Google(opts) {
 	var options = opts || {};
 	var callbackURL = options.callbackURL || "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/google/callback";
 	var accessType = options.accessType || "online";
-	var GOOGLE_CLIENT_ID = "403488058074-r54g9s3qb123gn706im8br42nbnc142b.apps.googleusercontent.com";
-	var GOOGLE_CLIENT_SECRET = "CJ0o6Dyd3s9sqpmytKY3Hb6m";
+	var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+	var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 	var SCOPES = [
 		"https://www.googleapis.com/auth/plus.me",
 		"https://www.googleapis.com/auth/calendar"
