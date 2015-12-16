@@ -2,11 +2,13 @@ var express = require("express");
 var LoginMiddleware = require("./login-middleware");
 var FacebookMiddleware = require("./facebook-middleware");
 var GoogleMiddleware = require("./google-middleware");
+var MovieStore = require("./movie-middleware");
 var Router = express.Router();
 
 var login = new LoginMiddleware();
 var google = new GoogleMiddleware();
 var facebook = new FacebookMiddleware();
+var movies = new MovieStore();
 
 Router.get("/", login.getRoot);
 
@@ -25,5 +27,8 @@ Router.get("/auth/facebook/done", facebook.finishOAuth);
 Router.get("/auth/google/", google.redirectToAuthURL);
 Router.get("/auth/google/callback", google.fetchAuthCode, google.fetchAccessToken);
 Router.get("/auth/google/done", google.finishOAuth);
+
+/* Movie Show timings */
+Router.get("/movies", movies.getMovies);
 
 module.exports = Router;

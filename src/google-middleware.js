@@ -5,7 +5,7 @@ var oauth2 = googleapis.auth.OAuth2;
 
 function Google(opts) {
 	var options = opts || {};
-	var callbackURL = options.callbackURL || "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/google/callback";
+	var callbackURL = options.callbackURL || "http://" + process.env.HOSTADDR + ":" + process.env.PORT + "/auth/google/callback";
 	var accessType = options.accessType || "online";
 	var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 	var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -39,7 +39,7 @@ function Google(opts) {
 				if (!err) {
 					oauthClient.setCredentials(tokens);
 					response.writeHead(302, {
-						Location: "http://"+process.env.HOSTADDR+":"+process.env.PORT+"/auth/google/done"
+						Location: "http://" + process.env.HOSTADDR + ":" + process.env.PORT + "/auth/google/done"
 					});
 					response.send();
 				} else {

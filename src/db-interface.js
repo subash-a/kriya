@@ -14,13 +14,6 @@ function connectToDatabase() {
 	});
 }
 
-var handleDBError = function (err) {
-	if (err) {
-		mongoose.disconnect();
-		throw err;
-	}
-};
-
 function createNewUser(userObject) {
 	return new Promise(function (resolve, reject) {
 		var newUser = new User(userObject);

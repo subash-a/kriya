@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 function UserStore(schema) {
-	if(!schema) {
+	if (!schema) {
 		throw new Error("Schema is not defined");
 	}
 	schema.pre("save", function (next) {
@@ -46,7 +46,7 @@ UserStore.prototype.getUser = function (userInstance) {
 
 // Should interface be modify user or save user?
 function saveUserEntry(userEntry) {
-	var promise = new Promise(function () {
+	var promise = new Promise(function (resolve, reject) {
 		userEntry.save(function (err) {
 			if (err) {
 				reject(err);
@@ -64,7 +64,7 @@ UserStore.prototype.save = function (userInstance) {
 
 
 UserStore.prototype.deleteUser = function (userObject) {
-
+	return userObject;
 };
 
 module.exports = UserStore;
